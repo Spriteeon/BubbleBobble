@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\BubbleBobble.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{82D320C0-55FB-47F1-BC73-C35ECD3704C9}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\BubbleBobble.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\BubbleBobbleEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{8EFD045F-2916-4E53-A6E9-FE16C5A75677}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\BubbleBobble">
+      <UniqueIdentifier>{839AE27A-A474-466F-8433-F903347C245E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\BubbleBobble\BubbleBobble.Build.cs">
+      <Filter>Source\BubbleBobble</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\BubbleBobble\BubbleBobble.cpp">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BubbleBobble\BubbleBobble.h">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BubbleBobble\BubbleBobbleCharacter.cpp">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BubbleBobble\BubbleBobbleCharacter.h">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BubbleBobble\BubbleBobbleGameMode.cpp">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BubbleBobble\BubbleBobbleGameMode.h">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
