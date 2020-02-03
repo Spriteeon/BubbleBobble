@@ -1,13 +1,16 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.21",
+	"EngineAssociation": "{42B7C503-4422-4D79-25BE-F9BF06828CDB}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
 		{
 			"Name": "BubbleBobble",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [
