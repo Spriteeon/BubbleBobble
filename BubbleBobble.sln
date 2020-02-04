@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{C464DAC4-AA15-4A71-A08F-EFFD9CD73C4C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{2D7126C7-E072-4E1C-B425-64BBBD845888}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{8DE730DA-B4AD-4E57-93EF-1A9A6B4B825D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{0DFFD38B-188B-455F-A731-4075CD6DF268}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{A9FDC739-2EF6-49F3-8ACC-E3E473D334DF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BubbleBobble", "Intermediate\ProjectFiles\BubbleBobble.vcxproj", "{8EAE36E6-DED1-4CCE-9FCF-95A13FEB0AD6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{ADD0BC66-2062-468F-AC0A-823357C7BD41}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{49BF5903-C6E5-4DC2-B975-AC3F7107326E}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -81,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A9FDC739-2EF6-49F3-8ACC-E3E473D334DF} = {C464DAC4-AA15-4A71-A08F-EFFD9CD73C4C}
-		{8EAE36E6-DED1-4CCE-9FCF-95A13FEB0AD6} = {8DE730DA-B4AD-4E57-93EF-1A9A6B4B825D}
+		{A9FDC739-2EF6-49F3-8ACC-E3E473D334DF} = {2D7126C7-E072-4E1C-B425-64BBBD845888}
+		{8EAE36E6-DED1-4CCE-9FCF-95A13FEB0AD6} = {0DFFD38B-188B-455F-A731-4075CD6DF268}
 	EndGlobalSection
 EndGlobal
