@@ -162,7 +162,8 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
-
-	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
-
+	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+	{
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
+	}
 }
