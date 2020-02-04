@@ -10,6 +10,8 @@
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
 
+#include "Engine/Engine.h"
+
 DEFINE_LOG_CATEGORY_STATIC(SideScrollerCharacter, Log, All);
 
 //////////////////////////////////////////////////////////////////////////
@@ -110,6 +112,8 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABubbleBobbleCharacter::MoveRight);
 
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ABubbleBobbleCharacter::Fire);
+
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &ABubbleBobbleCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &ABubbleBobbleCharacter::TouchStopped);
 }
@@ -154,4 +158,11 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 			Controller->SetControlRotation(FRotator(0.0f, 0.0f, 0.0f));
 		}
 	}
+}
+
+void ABubbleBobbleCharacter::Fire() //Shooting
+{
+
+	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
+
 }

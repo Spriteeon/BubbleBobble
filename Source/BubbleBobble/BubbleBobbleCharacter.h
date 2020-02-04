@@ -58,6 +58,9 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
 
+	//Shooting 
+	void Fire();
+
 public:
 	ABubbleBobbleCharacter();
 
