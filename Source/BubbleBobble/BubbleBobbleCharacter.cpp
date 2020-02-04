@@ -49,12 +49,12 @@ ABubbleBobbleCharacter::ABubbleBobbleCharacter()
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 
 	// Configure character movement
-	GetCharacterMovement()->GravityScale = 2.0f;
-	GetCharacterMovement()->AirControl = 0.80f;
-	GetCharacterMovement()->JumpZVelocity = 1000.f;
-	GetCharacterMovement()->GroundFriction = 3.0f;
+	GetCharacterMovement()->GravityScale = 2.0f;	// CHANGED (2.0f)
+	GetCharacterMovement()->AirControl = 0.4f;		// CHANGED (0.8f)
+	GetCharacterMovement()->JumpZVelocity = 1300.0f; // CHANGED (1000.0f)
+	GetCharacterMovement()->GroundFriction = 8.0f;	// CHANGED (3.0f)
 	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
-	GetCharacterMovement()->MaxFlySpeed = 600.0f;
+	GetCharacterMovement()->MaxFlySpeed = 300.0f;	// CHANGED (600.0f)
 
 	// Lock character motion onto the XZ plane, so the character can't move in or out of the screen
 	GetCharacterMovement()->bConstrainToPlane = true;
