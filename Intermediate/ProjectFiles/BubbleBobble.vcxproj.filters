@@ -54,14 +54,4 @@
       <Filter>Source\BubbleBobble</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\BubbleBobble\Enemy.h">
-      <Filter>Source\BubbleBobble</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\BubbleBobble\Enemy.cpp">
-      <Filter>Source\BubbleBobble</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>
