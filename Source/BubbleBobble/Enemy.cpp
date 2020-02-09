@@ -20,7 +20,7 @@ void AEnemy::BeginPlay()
 
 void AEnemy::Movement()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("MOVE!"));
+	UE_LOG(LogTemp, Warning, TEXT("MOVE!"));
 
 	FVector newLocation = GetActorLocation();
 	if (AActor::GetWorld()->GetTimeSeconds() >= movement_delay + 1.0)
@@ -32,13 +32,13 @@ void AEnemy::Movement()
 	{
 		//newLocation.X += 1;
 		//SetActorLocation(newLocation);
-		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), 1.0);
+		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), 10.0);
 	}
 	else
 	{
 		//newLocation.X-= 1;
 		//SetActorLocation(newLocation);
-		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), -1.0);
+		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), -10.0);
 	}
 }
 
