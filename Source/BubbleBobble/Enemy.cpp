@@ -47,5 +47,6 @@ void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Movement();
+	UE_LOG(LogTemp, Warning, TEXT("Test"));
 }
 
