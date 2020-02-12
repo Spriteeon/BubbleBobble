@@ -59,6 +59,7 @@ protected:
 	// End of APawn interface
 
 	//Shooting 
+	UFUNCTION()
 	void Fire();
 
 public:
@@ -68,4 +69,9 @@ public:
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	// Projectile class to spawn
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	TSubclassOf<class ABubble> BubbleClass;
+
 };
