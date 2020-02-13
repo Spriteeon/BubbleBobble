@@ -170,10 +170,10 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 
 void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	//if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-	//{
-	//	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
-	//}
+	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+	{
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
+	}
 	
 	if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
 	{
