@@ -101,6 +101,14 @@ void ABubbleBobbleCharacter::Tick(float DeltaSeconds)
 	UpdateCharacter();	
 }
 
+void ABubbleBobbleCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ABubbleBobbleCharacter::OnOverlapBegin);
+
+	spawnPos = this->GetActorLocation();
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -160,10 +168,48 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 	}
 }
 
+void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+	{
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
+	}
+
+	// Checks actor is not ourself.
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
+	{
+		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
+		{
+			if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+			{
+				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
+			}
+
+			if (lives <= 0)
+			{
+				// GAME OVER
+				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "DEAD");
+			}
+			else
+			{
+				Respawn();
+			}
+		}
+	}	
+}
+
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
 	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
 	{
 		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
 	}
+}
+
+void ABubbleBobbleCharacter::Respawn()
+{
+	lives--;
+	this->SetActorLocation(spawnPos, false);
+
+	// INVINCIBLE FOR X TIME
 }
