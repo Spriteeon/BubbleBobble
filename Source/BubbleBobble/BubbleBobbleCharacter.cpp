@@ -174,32 +174,28 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 	{
 		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
 	}
-	
-	if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
-	{
-		if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-		{
-			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
-		}
-
-		if (lives <= 0)
-		{
-			// GAME OVER
-		}
-		else
-		{
-			Respawn();
-		}
-	}
 
 	// Checks actor is not ourself.
-	//if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)) 
-	//{
-	//	
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
+	{
+		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
+		{
+			if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+			{
+				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
+			}
 
-	//		
-	//	}
-	//}
+			if (lives <= 0)
+			{
+				// GAME OVER
+				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "DEAD");
+			}
+			else
+			{
+				Respawn();
+			}
+		}
+	}	
 }
 
 void ABubbleBobbleCharacter::Fire() //Shooting
