@@ -1,6 +1,12 @@
 # BubbleBobble
 Game Jam group project
 
+-- TO LAUNCH UE4 AND CODE--
+1. Open the project through the engine. (Make sure it is 4.21)
+2. Say yes to everything it asks
+3. If it asks to convert it to a new version click on skip conversion
+4. Once opened, go to File->RefreshVisualStudioProject 
+
 -- TO LAUNCH UE4 IN THE LABS --
 1. Clone the project from GitHub Desktop to the Source folder in the computer
 2. Launch Visual Studio 2017
