@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\BubbleBobble.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{E0D80305-4EB7-40EC-B7C9-F51036E602CC}</UniqueIdentifier>
+      <UniqueIdentifier>{81BE52CB-2619-46BB-8AB5-370060485B5E}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\BubbleBobble.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{1521827C-1BF2-4ACD-B859-F4ABB073276C}</UniqueIdentifier>
+      <UniqueIdentifier>{AD343E80-8774-4BCC-BB86-21564AEE91A3}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -30,8 +30,14 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\BubbleBobble">
-      <UniqueIdentifier>{188B0F1B-4424-4EB8-B3DA-BC54C2D3F18D}</UniqueIdentifier>
+      <UniqueIdentifier>{4804EB16-D26A-4436-BE46-094C2190124D}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\BubbleBobble\Bubble.cpp">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BubbleBobble\Bubble.h">
+      <Filter>Source\BubbleBobble</Filter>
+    </ClInclude>
     <None Include="..\..\Source\BubbleBobble\BubbleBobble.Build.cs">
       <Filter>Source\BubbleBobble</Filter>
     </None>
@@ -59,15 +65,5 @@
     <ClInclude Include="..\..\Source\BubbleBobble\Enemy.h">
       <Filter>Source\BubbleBobble</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\BubbleBobble\Bubble.h">
-      <Filter>Source\BubbleBobble</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\BubbleBobble\Bubble.cpp">
-      <Filter>Source\BubbleBobble</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
