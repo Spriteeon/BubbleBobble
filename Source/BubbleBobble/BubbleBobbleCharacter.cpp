@@ -9,7 +9,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
-//#include "Components/ArrowComponent.h"
 
 #include "Engine/Engine.h"
 
@@ -52,9 +51,6 @@ ABubbleBobbleCharacter::ABubbleBobbleCharacter()
 	SideViewCameraComponent->bUsePawnControlRotation = false;
 	SideViewCameraComponent->bAutoActivate = true;*/
 	GetCharacterMovement()->bOrientRotationToMovement = false;
-
-	//Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
-	//Arrow->RelativeLocation = FVector(70.0f, 0.0f, 0.0f);
 
 	// Configure character movement
 	GetCharacterMovement()->GravityScale = 2.0f;	// CHANGED (2.0f)
@@ -175,11 +171,11 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 
 	//Spawn Bubble
 
-	/*UWorld* World = GetWorld();
+	UWorld* World = GetWorld();
 	if (World)
 	{
 		ABubble* Bubble = World->SpawnActor<ABubble>(GetActorLocation(), GetActorRotation());
-	}*/
+	}
 
 
 }
