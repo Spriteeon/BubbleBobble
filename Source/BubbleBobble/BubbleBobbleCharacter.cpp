@@ -12,6 +12,8 @@
 
 #include "Engine/Engine.h"
 
+#include "Bubble.h"
+
 DEFINE_LOG_CATEGORY_STATIC(SideScrollerCharacter, Log, All);
 
 //////////////////////////////////////////////////////////////////////////
@@ -204,6 +206,16 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 	{
 		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
 	}
+
+	//Spawn Bubble
+
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		ABubble* Bubble = World->SpawnActor<ABubble>(GetActorLocation(), GetActorRotation());
+	}
+
+
 }
 
 void ABubbleBobbleCharacter::Respawn()
