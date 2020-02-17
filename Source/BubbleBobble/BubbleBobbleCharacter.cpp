@@ -202,19 +202,8 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
-	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-	{
-		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "Fired");
-	}
-
-	//Spawn Bubble
-
-	UWorld* World = GetWorld();
-	if (World)
-	{
-		ABubble* Bubble = World->SpawnActor<ABubble>(GetActorLocation(), GetActorRotation());
-	}
-
+	
+	//Put C++ Shooting Code Here
 
 }
 
