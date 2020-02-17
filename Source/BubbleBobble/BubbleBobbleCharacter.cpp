@@ -174,7 +174,7 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 {
 	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
 	{
-		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
+		//GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
 	}
 
 	// Checks actor is not ourself.
@@ -197,6 +197,7 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 				Respawn();
 			}
 		}
+
 	}	
 }
 

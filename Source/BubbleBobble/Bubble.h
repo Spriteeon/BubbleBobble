@@ -24,13 +24,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//Sphere Collision Component
-
-	/*UPROPERTY(VisableDefaultsOnly, Category = Projectile)
-	class USphereComponent* CollisionComponent;*/
+	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	class USphereComponent* CollisionComponent;
 
 	// Projectile movement component.
 	UPROPERTY(VisibleAnywhere, Category = Movement)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	void FireInDirection(const FVector& ShootDirection);
 
