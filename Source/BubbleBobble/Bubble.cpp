@@ -24,8 +24,8 @@ ABubble::ABubble()
 	// Use this component to drive this projectile's movement.
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->SetUpdatedComponent(CollisionComponent);
-	ProjectileMovementComponent->InitialSpeed = 250.0f;
-	ProjectileMovementComponent->MaxSpeed = 250.0f;
+	ProjectileMovementComponent->InitialSpeed = 2600.0f;
+	ProjectileMovementComponent->MaxSpeed = 2600.0f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
