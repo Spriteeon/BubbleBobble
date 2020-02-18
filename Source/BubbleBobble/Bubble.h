@@ -36,4 +36,6 @@ public:
 
 	void FireInDirection(const FVector& ShootDirection);
 
+	void Despawn();
+
 };
