@@ -56,6 +56,7 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 		if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
 		{
 			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
+			this->Despawn();
 		}
 
 	}
@@ -67,5 +68,12 @@ void ABubble::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
+
+}
+
+void ABubble::Despawn()
+{
+
+	this->Destroy();
 
 }
