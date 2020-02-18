@@ -63,17 +63,17 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 
 }
 
+void ABubble::Despawn()
+{
+
+	this->Destroy();
+
+}
+
 // Called every frame
 void ABubble::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
-
-}
-
-void ABubble::Despawn()
-{
-
-	this->Destroy();
 
 }
