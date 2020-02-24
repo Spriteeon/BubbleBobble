@@ -5,6 +5,7 @@
 #include "BubbleBobble.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "TimerManager.h"
 
 #include "Engine/Engine.h"
 
@@ -46,6 +47,9 @@ void ABubble::BeginPlay()
 	//Collision stuff
 	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABubble::OnOverlapBegin);
 
+	// Call Float once (0.0f), starting two seconds from now.
+	GetWorldTimerManager().SetTimer(floatTimer, this, &ABubble::Float, 1.0f, true, 0.3f);
+
 }
 
 void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -70,10 +74,23 @@ void ABubble::Despawn()
 
 }
 
+void ABubble::Float()
+{
+
+	GetWorldTimerManager().ClearTimer(floatTimer);
+
+	//Start floating upwards
+	this->Despawn();
+
+}
+
 // Called every frame
 void ABubble::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
+
+	//After a certain amount of time, Float
+
 
 }
