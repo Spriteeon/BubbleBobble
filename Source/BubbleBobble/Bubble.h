@@ -16,8 +16,11 @@ public:
 	ABubble();
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	FTimerHandle floatTimer;
 
 public:
 	// Called every frame
@@ -36,5 +39,6 @@ public:
 
 	void FireInDirection(const FVector& ShootDirection);
 	void Despawn();
+	void Float();
 
 };
