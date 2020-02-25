@@ -55,15 +55,15 @@ void ABubble::BeginPlay()
 void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 
-	if (OtherActor->ActorHasTag("Enemy")) // Checks bubble is colliding with enemy
-	{
-		if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-		{
-			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
-			this->Despawn();
-		}
+	//if (OtherActor->ActorHasTag("Enemy")) // Checks bubble is colliding with enemy
+	//{
+	//	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+	//	{
+	//		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
+	//		this->Despawn();
+	//	}
 
-	}
+	//}
 
 }
 

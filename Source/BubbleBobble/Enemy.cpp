@@ -1,51 +1,43 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Enemy.h"
+#include "BubbleBobble.h"
+#include "Components/CapsuleComponent.h"
 
+#include "Engine/Engine.h"
 
 // Sets default values
 AEnemy::AEnemy()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	//PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;
 }
-//
-//// Called when the game starts or when spawned
-//void AEnemy::BeginPlay()
-//{
-//	Super::BeginPlay();
-//	movement_delay = AActor::GetWorld()->GetTimeSeconds();
-//}
-//
-//void AEnemy::Movement()
-//{
-//	UE_LOG(LogTemp, Warning, TEXT("MOVE!"));
-//
-//	FVector newLocation = GetActorLocation();
-//	if (AActor::GetWorld()->GetTimeSeconds() >= movement_delay + 1.0)
-//	{
-//		movement_delay = AActor::GetWorld()->GetTimeSeconds();
-//		move_dir = (!move_dir);
-//	}
-//	if (move_dir)
-//	{
-//		//newLocation.X += 1;
-//		//SetActorLocation(newLocation);
-//		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), 10.0);
-//	}
-//	else
-//	{
-//		//newLocation.X-= 1;
-//		//SetActorLocation(newLocation);
-//		AddMovementInput(FVector(1.0f, 0.0f, 0.0f), -10.0);
-//	}
-//}
-//
-//// Called every frame
-//void AEnemy::Tick(float DeltaTime)
-//{
-//	Super::Tick(DeltaTime);
-//	Movement();
-//	UE_LOG(LogTemp, Warning, TEXT("Test"));
-//}
-//
+
+// Called when the game starts or when spawned
+void AEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AEnemy::OnOverlapBegin);
+}
+
+void AEnemy::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+
+	if (OtherActor->ActorHasTag("Bubble")) // Checks bubble is colliding with enemy
+	{
+		if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+		{
+			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "BUBBLED");
+			OtherActor->Destroy();
+		}
+
+	}
+
+}
+
+// Called every frame
+void AEnemy::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
