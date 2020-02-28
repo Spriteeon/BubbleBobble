@@ -27,8 +27,8 @@ void AEnemy::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 	{
 		if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
 		{
-			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "BUBBLED");
-			OtherActor->Destroy();
+			//GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "BUBBLED");
+			//OtherActor->Destroy();
 		}
 
 	}
