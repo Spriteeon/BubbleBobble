@@ -93,7 +93,31 @@ void ABubbleBobbleCharacter::UpdateAnimation()
 	if( GetSprite()->GetFlipbook() != DesiredAnimation 	)
 	{
 		GetSprite()->SetFlipbook(DesiredAnimation);
-	}
+	}	
+
+	
+	/*switch (AnimationState)
+	{
+	case EAnimationStates::eIdle:	
+		UE_LOG(LogTemp, Warning, TEXT("IDLE"));
+		AnimationState = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
+		GetSprite()->SetFlipbook(IdleAnimation);
+		break;
+	case EAnimationStates::eRunning:
+		UE_LOG(LogTemp, Warning, TEXT("RUNNING"));
+		GetSprite()->SetFlipbook(RunningAnimation);
+		break;
+	case EAnimationStates::eFiring:
+		UE_LOG(LogTemp, Warning, TEXT("FIRING"));
+		GetSprite()->SetFlipbook(FiringAnimation);
+		break;
+	case EAnimationStates::eJumping:
+		UE_LOG(LogTemp, Warning, TEXT("JUMPING"));
+		GetSprite()->SetFlipbook(JumpingAnimation);
+		break;
+	default:
+		break;
+	}*/
 }
 
 void ABubbleBobbleCharacter::Tick(float DeltaSeconds)
@@ -123,6 +147,7 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABubbleBobbleCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ABubbleBobbleCharacter::Fire);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ABubbleBobbleCharacter::StopAnimation);
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &ABubbleBobbleCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &ABubbleBobbleCharacter::TouchStopped);
@@ -203,9 +228,26 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
-	
+	AnimationState = EAnimationStates::eFiring;
+	UE_LOG(LogTemp, Warning, TEXT("IT'S FIRING"));
+	UpdateAnimation();
+	UWorld* const World = GetWorld();
+	if (World != NULL)
+	{
+		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass);
+		if (Bubble)
+		{
+			Bubble->FireInDirection(GetActorForwardVector());
+		}
+	}
 	//Put C++ Shooting Code Here
 
+}
+
+void ABubbleBobbleCharacter::StopAnimation()
+{
+	AnimationState = EAnimationStates::eIdle;
+	UpdateAnimation();
 }
 
 void ABubbleBobbleCharacter::Respawn()
