@@ -82,6 +82,7 @@ void ABubble::Float()
 {
 
 	GetWorldTimerManager().ClearTimer(floatTimer);
+	floating = true;
 
 	this->Despawn();
 

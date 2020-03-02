@@ -23,6 +23,10 @@ protected:
 	FTimerHandle floatTimer;
 
 public:
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Floating)
+	bool floating{ false };
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
