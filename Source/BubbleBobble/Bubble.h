@@ -1,5 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+//Use this for floating
+//https://subscription.packtpub.com/book/game_development/9781785286018/1/ch01lvl1sec12/adding-movement
+
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -24,7 +28,7 @@ protected:
 
 public:
 
-	UPROPERTY(VisibleDefaultsOnly, Category = Floating)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Floating)
 	bool floating{ false };
 
 	// Called every frame
@@ -38,7 +42,7 @@ public:
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	// Projectile movement component.
-	UPROPERTY(VisibleAnywhere, Category = Movement)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
 	void FireInDirection(const FVector& ShootDirection);
