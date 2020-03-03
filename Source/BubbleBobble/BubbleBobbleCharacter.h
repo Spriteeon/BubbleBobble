@@ -16,6 +16,16 @@ class UTextRenderComponent;
  * The CharacterMovementComponent (inherited from ACharacter) handles movement of the collision capsule
  * The Sprite component (inherited from APaperCharacter) handles the visuals
  */
+
+UENUM(BlueprintType)
+enum class EAnimationStates : uint8
+{
+	eIdle,
+	eRunning,
+	eFiring,
+	eJumping
+};
+
 UCLASS(config=Game)
 class ABubbleBobbleCharacter : public APaperCharacter
 {
@@ -29,10 +39,15 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
+	EAnimationStates AnimationState = EAnimationStates::eIdle;
+
 	UTextRenderComponent* TextComponent;
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void BeginPlay() override;
+
+	void StopAnimation();
 
 protected:
 
@@ -46,6 +61,14 @@ protected:
 	// The animation to play while idle (standing still)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
 	class UPaperFlipbook* IdleAnimation;
+
+	// The animation to play while firing
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
+	class UPaperFlipbook* FiringAnimation;
+
+	// The animation to play while jumping
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
+	class UPaperFlipbook* JumpingAnimation;
 
 	/** Called to choose the correct animation to play based on the character's movement state */
 	void UpdateAnimation();
