@@ -42,6 +42,8 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	EAnimationStates AnimationState = EAnimationStates::eIdle;
 
+	FTimerHandle loopTimeHandle; 
+
 	UTextRenderComponent* TextComponent;
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -103,6 +105,9 @@ public:
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	UFUNCTION()
+	void onTimerEnd();
 
 	int GetLives() const { }
 

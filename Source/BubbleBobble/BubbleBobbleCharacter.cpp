@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
+#include "TimerManager.h"
 
 #include "Engine/Engine.h"
 
@@ -89,18 +90,20 @@ void ABubbleBobbleCharacter::UpdateAnimation()
 	const float PlayerSpeedSqr = PlayerVelocity.SizeSquared();
 
 	// Are we moving or standing still?
-	UPaperFlipbook* DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? RunningAnimation : IdleAnimation;
+	/*UPaperFlipbook* DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? RunningAnimation : IdleAnimation;
 	if( GetSprite()->GetFlipbook() != DesiredAnimation 	)
 	{
 		GetSprite()->SetFlipbook(DesiredAnimation);
-	}	
-
+	}	*/
+	if (AnimationState == EAnimationStates::eRunning || AnimationState == EAnimationStates::eIdle)
+	{
+		AnimationState = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
+	}
 	
-	/*switch (AnimationState)
+	switch (AnimationState)
 	{
 	case EAnimationStates::eIdle:	
-		UE_LOG(LogTemp, Warning, TEXT("IDLE"));
-		AnimationState = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Idle");
 		GetSprite()->SetFlipbook(IdleAnimation);
 		break;
 	case EAnimationStates::eRunning:
@@ -108,16 +111,16 @@ void ABubbleBobbleCharacter::UpdateAnimation()
 		GetSprite()->SetFlipbook(RunningAnimation);
 		break;
 	case EAnimationStates::eFiring:
-		UE_LOG(LogTemp, Warning, TEXT("FIRING"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, "Fire!!");
 		GetSprite()->SetFlipbook(FiringAnimation);
 		break;
 	case EAnimationStates::eJumping:
-		UE_LOG(LogTemp, Warning, TEXT("JUMPING"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Jump!!");
 		GetSprite()->SetFlipbook(JumpingAnimation);
 		break;
 	default:
 		break;
-	}*/
+	}
 }
 
 void ABubbleBobbleCharacter::Tick(float DeltaSeconds)
@@ -156,6 +159,7 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 void ABubbleBobbleCharacter::MoveRight(float Value)
 {
 	/*UpdateChar();*/
+	AnimationState = EAnimationStates::eRunning;
 
 	// Apply the input to the character motion
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
@@ -229,30 +233,27 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
 	AnimationState = EAnimationStates::eFiring;
-	UE_LOG(LogTemp, Warning, TEXT("IT'S FIRING"));
 	UpdateAnimation();
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
-		FActorSpawnParameters spawnParams;
-		spawnParams.Owner = this;
-		FRotator rotator;
 		FVector spawnLocation = this->RootComponent->GetComponentLocation();
 
-		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, rotator, spawnParams);
+		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, FRotator::ZeroRotator);
 		if (Bubble)
 		{
 			Bubble->FireInDirection(GetActorForwardVector());
 		}
 	}
-	//Put C++ Shooting Code Here
-
 }
 
 void ABubbleBobbleCharacter::StopAnimation()
 {
-	AnimationState = EAnimationStates::eIdle;
-	UpdateAnimation();
+	UWorld* const World = GetWorld();
+	if (World != NULL)
+	{
+		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, 0.8f, false);
+	}	
 }
 
 void ABubbleBobbleCharacter::Respawn()
@@ -261,4 +262,11 @@ void ABubbleBobbleCharacter::Respawn()
 	this->SetActorLocation(spawnPos, false);
 
 	// INVINCIBLE FOR X TIME
+}
+
+void ABubbleBobbleCharacter::onTimerEnd()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "from fire to idle");
+	AnimationState = EAnimationStates::eIdle;
+	UpdateAnimation();
 }
