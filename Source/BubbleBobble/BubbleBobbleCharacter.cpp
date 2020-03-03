@@ -234,7 +234,12 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
-		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass);
+		FActorSpawnParameters spawnParams;
+		spawnParams.Owner = this;
+		FRotator rotator;
+		FVector spawnLocation = this->RootComponent->GetComponentLocation();
+
+		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, rotator, spawnParams);
 		if (Bubble)
 		{
 			Bubble->FireInDirection(GetActorForwardVector());
