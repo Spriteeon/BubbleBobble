@@ -88,38 +88,38 @@ void ABubbleBobbleCharacter::UpdateAnimation()
 {
 	const FVector PlayerVelocity = GetVelocity();
 	const float PlayerSpeedSqr = PlayerVelocity.SizeSquared();
-
-	// Are we moving or standing still?
-	/*UPaperFlipbook* DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? RunningAnimation : IdleAnimation;
-	if( GetSprite()->GetFlipbook() != DesiredAnimation 	)
-	{
-		GetSprite()->SetFlipbook(DesiredAnimation);
-	}	*/
-	if (AnimationState == EAnimationStates::eRunning || AnimationState == EAnimationStates::eIdle)
-	{
-		AnimationState = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
-	}
 	
-	switch (AnimationState)
+	if (AnimationState != DesiredAnimation)
 	{
-	case EAnimationStates::eIdle:	
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Idle");
-		GetSprite()->SetFlipbook(IdleAnimation);
-		break;
-	case EAnimationStates::eRunning:
-		UE_LOG(LogTemp, Warning, TEXT("RUNNING"));
-		GetSprite()->SetFlipbook(RunningAnimation);
-		break;
-	case EAnimationStates::eFiring:
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, "Fire!!");
-		GetSprite()->SetFlipbook(FiringAnimation);
-		break;
-	case EAnimationStates::eJumping:
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Jump!!");
-		GetSprite()->SetFlipbook(JumpingAnimation);
-		break;
-	default:
-		break;
+		AnimationState = DesiredAnimation;
+		switch (AnimationState)
+		{
+		case EAnimationStates::eIdle:
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Idle");
+			GetSprite()->SetFlipbook(IdleAnimation);
+			break;
+		case EAnimationStates::eRunning:
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, "Run");
+			GetSprite()->SetFlipbook(RunningAnimation);
+			break;
+		case EAnimationStates::eFiring:
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, "Fire!!");
+			GetSprite()->SetFlipbook(FiringAnimation);
+			break;
+		case EAnimationStates::eJumping:
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Jump!!");
+			GetSprite()->SetFlipbook(JumpingAnimation);
+			break;
+		default:
+			break;
+		}
+	}	
+	else
+	{
+		if (AnimationState == EAnimationStates::eIdle || AnimationState == EAnimationStates::eRunning)
+		{
+			DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
+		}
 	}
 }
 
@@ -159,7 +159,7 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 void ABubbleBobbleCharacter::MoveRight(float Value)
 {
 	/*UpdateChar();*/
-	AnimationState = EAnimationStates::eRunning;
+	//DesiredAnimation = EAnimationStates::eRunning;
 
 	// Apply the input to the character motion
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
@@ -232,8 +232,7 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
-	AnimationState = EAnimationStates::eFiring;
-	UpdateAnimation();
+	DesiredAnimation = EAnimationStates::eFiring;
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
@@ -246,14 +245,36 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 		}
 	}
 }
-
 void ABubbleBobbleCharacter::StopAnimation()
 {
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
-		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, 0.8f, false);
+		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, 0.6f, false);
+	}
+}
+
+void ABubbleBobbleCharacter::StopAnimation(float argWaitingTime)
+{
+	UWorld* const World = GetWorld();
+	if (World != NULL)
+	{
+		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, argWaitingTime, false);
 	}	
+}
+
+void ABubbleBobbleCharacter::Jump()
+{
+	bPressedJump = true;
+	JumpKeyHoldTime = 0.0f;
+	DesiredAnimation = EAnimationStates::eJumping;
+}
+
+void ABubbleBobbleCharacter::StopJumping()
+{
+	bPressedJump = false;
+	ResetJumpState();
+	StopAnimation(1.f);
 }
 
 void ABubbleBobbleCharacter::Respawn()
@@ -266,7 +287,7 @@ void ABubbleBobbleCharacter::Respawn()
 
 void ABubbleBobbleCharacter::onTimerEnd()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "from fire to idle");
-	AnimationState = EAnimationStates::eIdle;
-	UpdateAnimation();
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "from fire to idle");
+
+	DesiredAnimation = EAnimationStates::eIdle;
 }

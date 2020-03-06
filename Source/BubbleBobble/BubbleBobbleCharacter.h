@@ -41,6 +41,7 @@ class ABubbleBobbleCharacter : public APaperCharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	EAnimationStates AnimationState = EAnimationStates::eIdle;
+	EAnimationStates DesiredAnimation;
 
 	FTimerHandle loopTimeHandle; 
 
@@ -50,6 +51,9 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	virtual void BeginPlay() override;
 
 	void StopAnimation();
+	void StopAnimation(float argWaitingTime);
+	virtual void Jump() override;
+	virtual void StopJumping() override;
 
 protected:
 
