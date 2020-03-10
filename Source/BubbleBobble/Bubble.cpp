@@ -5,6 +5,7 @@
 #include "BubbleBobble.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 #include "TimerManager.h"
 
 #include "Engine/Engine.h"
@@ -33,6 +34,9 @@ ABubble::ABubble()
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
+
+	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
+	FloatingPawnMovement->Deactivate();
 
 }
 
@@ -85,9 +89,12 @@ void ABubble::Float()
 {
 
 	GetWorldTimerManager().ClearTimer(floatTimer);
+	ProjectileMovementComponent->Deactivate();
+	FloatingPawnMovement->Activate();
+
 	floating = true;
 
-	this->Despawn();
+	//this->Despawn();
 
 	//Start floating upwards
 	//Stop Horizontal Movement

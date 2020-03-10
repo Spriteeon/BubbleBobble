@@ -45,6 +45,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
+	class UFloatingPawnMovement* FloatingPawnMovement;
+
 	void FireInDirection(const FVector& ShootDirection);
 	void Despawn();
 	void Float();
