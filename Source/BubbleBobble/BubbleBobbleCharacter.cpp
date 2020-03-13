@@ -231,7 +231,7 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 
 	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "SHOT");
 
-	/*AnimationState = EAnimationStates::eFiring;
+	AnimationState = EAnimationStates::eFiring;
 	UE_LOG(LogTemp, Warning, TEXT("IT'S FIRING"));
 	UpdateAnimation();
 	UWorld* const World = GetWorld();
@@ -247,7 +247,7 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 		{
 			Bubble->FireInDirection(GetActorForwardVector());
 		}
-	}*/
+	}
 
 }
 
