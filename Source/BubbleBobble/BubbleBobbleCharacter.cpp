@@ -9,7 +9,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
-#include "TimerManager.h"
 
 #include "Engine/Engine.h"
 
@@ -88,39 +87,37 @@ void ABubbleBobbleCharacter::UpdateAnimation()
 {
 	const FVector PlayerVelocity = GetVelocity();
 	const float PlayerSpeedSqr = PlayerVelocity.SizeSquared();
-	
-	if (AnimationState != DesiredAnimation)
+
+	// Are we moving or standing still?
+	UPaperFlipbook* DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? RunningAnimation : IdleAnimation;
+	if( GetSprite()->GetFlipbook() != DesiredAnimation 	)
 	{
-		AnimationState = DesiredAnimation;
-		switch (AnimationState)
-		{
-		case EAnimationStates::eIdle:
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Idle");
-			GetSprite()->SetFlipbook(IdleAnimation);
-			break;
-		case EAnimationStates::eRunning:
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, "Run");
-			GetSprite()->SetFlipbook(RunningAnimation);
-			break;
-		case EAnimationStates::eFiring:
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, "Fire!!");
-			GetSprite()->SetFlipbook(FiringAnimation);
-			break;
-		case EAnimationStates::eJumping:
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Jump!!");
-			GetSprite()->SetFlipbook(JumpingAnimation);
-			break;
-		default:
-			break;
-		}
+		GetSprite()->SetFlipbook(DesiredAnimation);
 	}	
-	else
+
+	
+	/*switch (AnimationState)
 	{
-		if (AnimationState == EAnimationStates::eIdle || AnimationState == EAnimationStates::eRunning)
-		{
-			DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
-		}
-	}
+	case EAnimationStates::eIdle:	
+		UE_LOG(LogTemp, Warning, TEXT("IDLE"));
+		AnimationState = (PlayerSpeedSqr > 0.0f) ? EAnimationStates::eRunning : EAnimationStates::eIdle;
+		GetSprite()->SetFlipbook(IdleAnimation);
+		break;
+	case EAnimationStates::eRunning:
+		UE_LOG(LogTemp, Warning, TEXT("RUNNING"));
+		GetSprite()->SetFlipbook(RunningAnimation);
+		break;
+	case EAnimationStates::eFiring:
+		UE_LOG(LogTemp, Warning, TEXT("FIRING"));
+		GetSprite()->SetFlipbook(FiringAnimation);
+		break;
+	case EAnimationStates::eJumping:
+		UE_LOG(LogTemp, Warning, TEXT("JUMPING"));
+		GetSprite()->SetFlipbook(JumpingAnimation);
+		break;
+	default:
+		break;
+	}*/
 }
 
 void ABubbleBobbleCharacter::Tick(float DeltaSeconds)
@@ -159,7 +156,6 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 void ABubbleBobbleCharacter::MoveRight(float Value)
 {
 	/*UpdateChar();*/
-	//DesiredAnimation = EAnimationStates::eRunning;
 
 	// Apply the input to the character motion
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
@@ -235,57 +231,30 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 
 	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "SHOT");
 
-	AnimationState = EAnimationStates::eFiring;
+	/*AnimationState = EAnimationStates::eFiring;
 	UE_LOG(LogTemp, Warning, TEXT("IT'S FIRING"));
 	UpdateAnimation();
-
-	DesiredAnimation = EAnimationStates::eFiring;
-
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
+		FActorSpawnParameters spawnParams;
+		spawnParams.Owner = this;
+		FRotator rotator;
 		FVector spawnLocation = this->RootComponent->GetComponentLocation();
 
-		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, FRotator::ZeroRotator);
+		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, rotator, spawnParams);
 		if (Bubble)
 		{
 			Bubble->FireInDirection(GetActorForwardVector());
 		}
+	}*/
 
-	}
-
-	}
 }
+
 void ABubbleBobbleCharacter::StopAnimation()
 {
-	UWorld* const World = GetWorld();
-	if (World != NULL)
-	{
-		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, 0.6f, false);
-	}
-}
-
-void ABubbleBobbleCharacter::StopAnimation(float argWaitingTime)
-{
-	UWorld* const World = GetWorld();
-	if (World != NULL)
-	{
-		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::onTimerEnd, argWaitingTime, false);
-	}	
-}
-
-void ABubbleBobbleCharacter::Jump()
-{
-	bPressedJump = true;
-	JumpKeyHoldTime = 0.0f;
-	DesiredAnimation = EAnimationStates::eJumping;
-}
-
-void ABubbleBobbleCharacter::StopJumping()
-{
-	bPressedJump = false;
-	ResetJumpState();
-	StopAnimation(1.f);
+	AnimationState = EAnimationStates::eIdle;
+	UpdateAnimation();
 }
 
 void ABubbleBobbleCharacter::Respawn()
@@ -294,11 +263,4 @@ void ABubbleBobbleCharacter::Respawn()
 	this->SetActorLocation(spawnPos, false);
 
 	// INVINCIBLE FOR X TIME
-}
-
-void ABubbleBobbleCharacter::onTimerEnd()
-{
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "from fire to idle");
-
-	DesiredAnimation = EAnimationStates::eIdle;
 }
