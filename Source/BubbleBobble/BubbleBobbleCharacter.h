@@ -79,6 +79,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
 	class UPaperFlipbook* JumpingAnimation;
 
+	/** Sound to play each time we fire */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sounds)
+	class USoundBase* FireSound;
+
+	/** Sound to play each time we jump */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sounds)
+	class USoundBase* JumpSound;
+
+	/** Sound to play each time we jump */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sounds)
+	class USoundBase* RespawnSound;
+
+
 	/** Called to choose the correct animation to play based on the character's movement state */
 	void UpdateAnimation();
 

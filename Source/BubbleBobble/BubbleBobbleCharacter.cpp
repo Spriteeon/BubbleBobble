@@ -10,6 +10,7 @@
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "Engine/Engine.h"
 
@@ -232,6 +233,7 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 void ABubbleBobbleCharacter::Fire() //Shooting
 {
 	DesiredAnimation = EAnimationStates::eFiring;
+	UGameplayStatics::PlaySound2D(this, FireSound);
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
@@ -265,6 +267,7 @@ void ABubbleBobbleCharacter::StopAnimation(float argWaitingTime)
 
 void ABubbleBobbleCharacter::Jump()
 {
+	UGameplayStatics::PlaySound2D(this, JumpSound);
 	bPressedJump = true;
 	JumpKeyHoldTime = 0.0f;
 	DesiredAnimation = EAnimationStates::eJumping;
@@ -279,6 +282,7 @@ void ABubbleBobbleCharacter::StopJumping()
 
 void ABubbleBobbleCharacter::Respawn()
 {
+	UGameplayStatics::PlaySound2D(this, RespawnSound);
 	lives--;
 	this->SetActorLocation(spawnPos, false);
 	SetImmunity();
