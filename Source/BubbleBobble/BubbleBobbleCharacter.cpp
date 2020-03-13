@@ -203,7 +203,7 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 	}
 
 	// Checks actor is not ourself.
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && !isImmune)
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
 		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
 		{
@@ -263,16 +263,4 @@ void ABubbleBobbleCharacter::Respawn()
 	this->SetActorLocation(spawnPos, false);
 
 	// INVINCIBLE FOR X TIME
-
-	SetImmunity();
-	UWorld* const World = GetWorld();
-	if (World != NULL)
-	{
-		World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::SetImmunity , 2.f, false);
-	}
-}
-
-void ABubbleBobbleCharacter::onTimerEnd()
-{
-	DesiredAnimation = EAnimationStates::eIdle;
 }
