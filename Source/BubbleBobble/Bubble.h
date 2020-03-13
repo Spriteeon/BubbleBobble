@@ -31,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Floating)
 	bool floating{ false };
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collisions)
+	bool enemyCollision{ false };
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -45,8 +48,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
-	class UFloatingPawnMovement* FloatingPawnMovement;
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
+	class UFloatingPawnMovement* FloatingPawnMovement;*/
 
 	void FireInDirection(const FVector& ShootDirection);
 	void Despawn();

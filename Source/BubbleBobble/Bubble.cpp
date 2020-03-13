@@ -35,8 +35,8 @@ ABubble::ABubble()
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
 
-	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
-	FloatingPawnMovement->Deactivate();
+	/*FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
+	FloatingPawnMovement->Deactivate();*/
 
 }
 
@@ -71,8 +71,22 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 
 			//Change Sprite
 
+			OtherActor->Destroy();
+			enemyCollision = true;
 			this->Float();
 		}
+
+	}
+	if (OtherActor->ActorHasTag("Wall"))
+	{
+
+		this->Float();
+
+	}
+	if (OtherActor->ActorHasTag("Platform"))
+	{
+
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "PLATFORM COLLISION");
 
 	}
 
@@ -90,7 +104,7 @@ void ABubble::Float()
 
 	GetWorldTimerManager().ClearTimer(floatTimer);
 	ProjectileMovementComponent->Deactivate();
-	FloatingPawnMovement->Activate();
+	//FloatingPawnMovement->Activate();
 
 	floating = true;
 
