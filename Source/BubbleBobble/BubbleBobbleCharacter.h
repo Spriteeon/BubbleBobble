@@ -49,10 +49,13 @@ class ABubbleBobbleCharacter : public APaperCharacter
 
 	void StopAnimation();
 
+	void SetImmunity() { isImmune = !isImmune; }
+
 protected:
 
 	FVector spawnPos;
 	int lives = 3;
+	bool isImmune = false;
 
 	// The animation to play while running around
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Animations)
