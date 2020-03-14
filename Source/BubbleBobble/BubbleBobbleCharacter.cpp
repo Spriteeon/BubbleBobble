@@ -226,6 +226,12 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 				Respawn();
 			}
 		}
+		if (OtherActor->ActorHasTag("Wall"))
+		{
+
+
+
+		}
 
 	}	
 }
