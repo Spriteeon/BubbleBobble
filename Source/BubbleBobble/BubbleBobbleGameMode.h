@@ -18,4 +18,7 @@ class ABubbleBobbleGameMode : public AGameModeBase
 	GENERATED_BODY()
 public:
 	ABubbleBobbleGameMode();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	int Score{ 0 };
 };

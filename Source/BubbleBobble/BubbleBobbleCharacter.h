@@ -61,6 +61,8 @@ protected:
 
 	FVector spawnPos;
 	int lives = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isImmune = false;
 
 	// The animation to play while running around
