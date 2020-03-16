@@ -60,7 +60,8 @@ class ABubbleBobbleCharacter : public APaperCharacter
 protected:
 
 	FVector spawnPos;
-	int lives = 3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	int lives = 3; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isImmune = false;
