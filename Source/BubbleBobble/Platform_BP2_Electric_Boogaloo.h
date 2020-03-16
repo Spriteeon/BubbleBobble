@@ -8,6 +8,9 @@
 #include "PaperSpriteComponent.h"
 #include "Engine/Classes/Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "PaperCharacter.h"
+#include "Components/CapsuleComponent.h"
+#include "TimerManager.h"
 #include "Platform_BP2_Electric_Boogaloo.generated.h"
 
 UCLASS()
@@ -30,6 +33,14 @@ protected:
 	UPaperSprite* sprite1;
 
 	UBoxComponent* colBox;
+
+
+	FTimerHandle loopTimeHandle;
+
+	UWorld* World;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
 	//UPaperSprite* sprite2;
