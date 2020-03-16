@@ -110,11 +110,6 @@ void ABubble::Float()
 
 	//this->Despawn();
 
-	//Start floating upwards
-	//Stop Horizontal Movement
-
-	//Start Upwards Movement
-
 }
 
 // Called every frame
