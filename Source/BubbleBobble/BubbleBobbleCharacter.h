@@ -26,6 +26,13 @@ enum class EAnimationStates : uint8
 	eJumping
 };
 
+UENUM(BlueprintType)
+enum class EPlayerPower : uint8
+{
+	eStandard,
+	eBubblegum
+};
+
 UCLASS(config=Game)
 class ABubbleBobbleCharacter : public APaperCharacter
 {
@@ -42,6 +49,9 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	EAnimationStates AnimationState = EAnimationStates::eIdle;
 	EAnimationStates DesiredAnimation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	EPlayerPower currentPower = EPlayerPower::eStandard;
 
 	FTimerHandle loopTimeHandle;
 
@@ -60,6 +70,7 @@ class ABubbleBobbleCharacter : public APaperCharacter
 protected:
 
 	FVector spawnPos;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	int lives = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
@@ -134,7 +145,7 @@ public:
 	int GetLives() const { }
 
 	// Projectile class to spawn
-	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile)
 	TSubclassOf<class ABubble> BubbleClass;
 
 };
