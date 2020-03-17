@@ -77,6 +77,12 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 		}
 
 	}
+	if (OtherActor->ActorHasTag("Player"))
+	{
+
+		playerCollision = true;
+
+	}
 	if (OtherActor->ActorHasTag("Wall"))
 	{
 
@@ -104,11 +110,8 @@ void ABubble::Float()
 
 	GetWorldTimerManager().ClearTimer(floatTimer);
 	ProjectileMovementComponent->Deactivate();
-	//FloatingPawnMovement->Activate();
 
 	floating = true;
-
-	//this->Despawn();
 
 }
 
@@ -117,8 +120,5 @@ void ABubble::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
-
-	//After a certain amount of time, Float
-
 
 }

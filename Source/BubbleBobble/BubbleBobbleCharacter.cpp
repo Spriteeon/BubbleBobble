@@ -246,6 +246,14 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 		FVector spawnLocation = this->RootComponent->GetComponentLocation();
 
 		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, FRotator::ZeroRotator);
+		if (currentPower == EPlayerPower::eStandard)
+		{
+			Bubble->currentBubble = EBubbleType::eStandardBubble;
+		}
+		if (currentPower == EPlayerPower::eBubblegum)
+		{
+			Bubble->currentBubble = EBubbleType::eGumBubble;
+		}
 		if (Bubble)
 		{
 			Bubble->FireInDirection(GetActorForwardVector());
