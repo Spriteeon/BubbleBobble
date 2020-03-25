@@ -50,9 +50,6 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	EAnimationStates AnimationState = EAnimationStates::eIdle;
 	EAnimationStates DesiredAnimation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
-	EPlayerPower currentPower = EPlayerPower::eStandard;
-
 	FTimerHandle loopTimeHandle;
 
 	UTextRenderComponent* TextComponent;
@@ -133,6 +130,9 @@ protected:
 
 public:
 	ABubbleBobbleCharacter();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	EPlayerPower currentPower = EPlayerPower::eStandard;
 
 	/** Returns SideViewCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }

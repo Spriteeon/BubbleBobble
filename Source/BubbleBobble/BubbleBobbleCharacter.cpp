@@ -201,13 +201,13 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 
 void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-	{
-		//GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
-	}
+//	if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
+//	{
+//		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "COLLISION");
+//	}
 
 	// Checks actor is not ourself.
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && !isImmune)
+	if ((OtherActor != nullptr) && (OtherActor != this) && !isImmune)
 	{
 		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
 		{
@@ -246,6 +246,14 @@ void ABubbleBobbleCharacter::Fire() //Shooting
 		FVector spawnLocation = this->RootComponent->GetComponentLocation();
 
 		ABubble* Bubble = World->SpawnActor<ABubble>(BubbleClass, spawnLocation, FRotator::ZeroRotator);
+		if (currentPower == EPlayerPower::eStandard)
+		{
+			Bubble->currentBubble = EBubbleType::eStandardBubble;
+		}
+		if (currentPower == EPlayerPower::eBubblegum)
+		{
+			Bubble->currentBubble = EBubbleType::eGumBubble;
+		}
 		if (Bubble)
 		{
 			Bubble->FireInDirection(GetActorForwardVector());

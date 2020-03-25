@@ -10,6 +10,13 @@
 #include "GameFramework/Actor.h"
 #include "Bubble.generated.h"
 
+UENUM(BlueprintType)
+enum class EBubbleType : uint8
+{
+	eStandardBubble,
+	eGumBubble
+};
+
 UCLASS()
 class BUBBLEBOBBLE_API ABubble : public AActor
 {
@@ -28,11 +35,17 @@ protected:
 
 public:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BubbleType, meta = (AllowPrivateAccess = "true"))
+	EBubbleType currentBubble = EBubbleType::eStandardBubble;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Floating)
 	bool floating{ false };
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collisions)
 	bool enemyCollision{ false };
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collisions)
+	bool playerCollision{ false };
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
