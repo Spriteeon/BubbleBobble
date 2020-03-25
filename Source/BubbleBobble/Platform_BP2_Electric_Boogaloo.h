@@ -32,6 +32,37 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
 	UPaperSprite* sprite1;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite4;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite6;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite7;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite8;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite9;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPaperSprite* sprite10;
+	   
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta=(AllowPrivateAccess = true))
+	int isprite;
+
+
 	UBoxComponent* colBox;
 
 
@@ -39,34 +70,17 @@ protected:
 
 	UWorld* World;
 
+	void Activate_Floor_Player();
+	void Activate_Floor_Enemy();
+
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite2;
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite3;
+	
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite4;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite5;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite6;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite6;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
-	//UPaperSprite* sprite6;
-
-
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta=(AllowPrivateAccess = true))
-	//int isprite;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
