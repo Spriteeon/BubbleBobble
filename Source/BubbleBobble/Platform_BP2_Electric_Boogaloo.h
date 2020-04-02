@@ -6,12 +6,12 @@
 #include "GameFramework/Actor.h"
 #include "PaperSprite.h"
 #include "PaperSpriteComponent.h"
-#include "Engine/Classes/Components/BoxComponent.h"
+#include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "PaperCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "TimerManager.h"
-#include "Platform_BP2_Electric_Boogaloo.generated.h"
 
 UCLASS()
 class BUBBLEBOBBLE_API APlatform_BP2_Electric_Boogaloo : public AActor
@@ -62,7 +62,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta=(AllowPrivateAccess = true))
 	int isprite;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collision, meta = (AllowPrivateAccess = true))
 	UBoxComponent* colBox;
 
 
@@ -70,8 +70,7 @@ protected:
 
 	UWorld* World;
 
-	void Activate_Floor_Player();
-	void Activate_Floor_Enemy();
+protected:
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -79,7 +78,11 @@ protected:
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	
+	UFUNCTION()
+	void Activate_Floor_Player();
+
+	UFUNCTION()
+	void Activate_Floor_Enemy();	
 
 public:	
 	// Called every frame

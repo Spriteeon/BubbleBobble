@@ -13,10 +13,13 @@ APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
 	sprite->SetupAttachment(RootComponent);
 
 	colBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
-	colBox->SetupAttachment(sprite);
 	colBox->SetRelativeLocation(FVector(0, 0, 280));
 	colBox->SetRelativeScale3D(FVector(4.25, 1.0, 0.5));
-
+	colBox->OnComponentBeginOverlap.AddDynamic(this, &APlatform_BP2_Electric_Boogaloo::OnOverlapBegin);
+	colBox->OnComponentEndOverlap.AddDynamic(this, &APlatform_BP2_Electric_Boogaloo::OnOverlapEnd);
+	colBox->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
+	colBox->CanCharacterStepUpOn = ECB_No;
+	colBox->SetupAttachment(sprite);
 
 	switch (isprite)
 	{
