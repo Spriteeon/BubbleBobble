@@ -12,6 +12,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "TimerManager.h"
+#include "Platform_BP2_Electric_Boogaloo.generated.h"
 
 UCLASS()
 class BUBBLEBOBBLE_API APlatform_BP2_Electric_Boogaloo : public AActor
@@ -26,7 +27,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Sprite, meta = (AllowPrivateAccess = true))
 	UPaperSpriteComponent* sprite;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sprite, meta = (AllowPrivateAccess = true))

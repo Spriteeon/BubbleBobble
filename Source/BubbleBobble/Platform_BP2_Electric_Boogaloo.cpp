@@ -8,6 +8,11 @@ APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	if (!RootComponent)
+	{
+		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("PlatformBase"));
+	}	
+
 	World = GetWorld();
 	sprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("Paper Sprite"));
 	sprite->SetupAttachment(RootComponent);
@@ -17,9 +22,14 @@ APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
 	colBox->SetRelativeScale3D(FVector(4.25, 1.0, 0.5));
 	colBox->OnComponentBeginOverlap.AddDynamic(this, &APlatform_BP2_Electric_Boogaloo::OnOverlapBegin);
 	colBox->OnComponentEndOverlap.AddDynamic(this, &APlatform_BP2_Electric_Boogaloo::OnOverlapEnd);
-	colBox->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
-	colBox->CanCharacterStepUpOn = ECB_No;
 	colBox->SetupAttachment(sprite);
+
+}
+
+// Called when the game starts or when spawned
+void APlatform_BP2_Electric_Boogaloo::BeginPlay()
+{
+	Super::BeginPlay();
 
 	switch (isprite)
 	{
@@ -54,12 +64,7 @@ APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
 		sprite->SetSprite(sprite10);
 		break;
 	}
-}
 
-// Called when the game starts or when spawned
-void APlatform_BP2_Electric_Boogaloo::BeginPlay()
-{
-	Super::BeginPlay();
 	sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 	sprite->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Ignore);
 }
@@ -121,7 +126,8 @@ void APlatform_BP2_Electric_Boogaloo::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (!(colBox->GetComponentLocation().Z < UGameplayStatics::GetPlayerCharacter(World, 0)->GetCapsuleComponent()->GetComponentLocation().Z))
 	{
-		sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+		//sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+		//THE PROBLEM IS HERE!!
 	}
 	
 }
