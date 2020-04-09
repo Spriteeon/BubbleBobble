@@ -66,10 +66,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collision, meta = (AllowPrivateAccess = true))
 	UBoxComponent* colBox;
 
-
 	FTimerHandle loopTimeHandle;
-
-	UWorld* World;
 
 protected:
 

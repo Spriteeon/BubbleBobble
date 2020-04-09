@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Platform_BP2_Electric_Boogaloo.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
@@ -13,7 +14,6 @@ APlatform_BP2_Electric_Boogaloo::APlatform_BP2_Electric_Boogaloo()
 		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("PlatformBase"));
 	}	
 
-	World = GetWorld();
 	sprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("Paper Sprite"));
 	sprite->SetupAttachment(RootComponent);
 
@@ -67,6 +67,7 @@ void APlatform_BP2_Electric_Boogaloo::BeginPlay()
 
 	sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 	sprite->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Ignore);
+	sprite->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Block);
 }
 
 void APlatform_BP2_Electric_Boogaloo::Activate_Floor_Player()
@@ -81,15 +82,21 @@ void APlatform_BP2_Electric_Boogaloo::Activate_Floor_Enemy()
 
 void APlatform_BP2_Electric_Boogaloo::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (OtherActor == UGameplayStatics::GetPlayerCharacter(World, 0))
+	if (OtherActor->ActorHasTag("Player"))
 	{
-		if (colBox->GetComponentLocation().Z < UGameplayStatics::GetPlayerCharacter(World, 0)->GetCapsuleComponent()->GetComponentLocation().Z)
+		if (colBox->GetComponentLocation().Z < OtherActor->GetRootComponent()->GetComponentLocation().Z) // Coming from above
 		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Player has collided with the platform FROM ABOVE");
 			sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 		}
 		else
 		{
-			World->GetTimerManager().SetTimer(loopTimeHandle, this, &APlatform_BP2_Electric_Boogaloo::Activate_Floor_Player , 0.2, false);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Player has collided with the platform FROM BELLOW");
+			UWorld* const World = GetWorld();
+			if (World != NULL)
+			{
+				World->GetTimerManager().SetTimer(loopTimeHandle, this, &APlatform_BP2_Electric_Boogaloo::Activate_Floor_Player, 0.3f, false);
+			}			
 		}
 	}
 	else
@@ -102,7 +109,11 @@ void APlatform_BP2_Electric_Boogaloo::OnOverlapBegin(UPrimitiveComponent * Overl
 			}
 			else
 			{
-				World->GetTimerManager().SetTimer(loopTimeHandle, this, &APlatform_BP2_Electric_Boogaloo::Activate_Floor_Enemy, 0.2, false);
+				UWorld* const World = GetWorld();
+				if (World != NULL)
+				{
+					World->GetTimerManager().SetTimer(loopTimeHandle, this, &APlatform_BP2_Electric_Boogaloo::Activate_Floor_Enemy, 0.3f, false);
+				}				
 			}
 		}
 	}
@@ -110,7 +121,7 @@ void APlatform_BP2_Electric_Boogaloo::OnOverlapBegin(UPrimitiveComponent * Overl
 
 void APlatform_BP2_Electric_Boogaloo::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor == UGameplayStatics::GetPlayerCharacter(World, 0))
+	if (OtherActor->ActorHasTag("Player"))
 	{
 		sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 	}
@@ -124,11 +135,19 @@ void APlatform_BP2_Electric_Boogaloo::OnOverlapEnd(UPrimitiveComponent * Overlap
 void APlatform_BP2_Electric_Boogaloo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (!(colBox->GetComponentLocation().Z < UGameplayStatics::GetPlayerCharacter(World, 0)->GetCapsuleComponent()->GetComponentLocation().Z))
-	{
-		//sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
-		//THE PROBLEM IS HERE!!
-	}
-	
+	//UWorld* const World = GetWorld();
+	//if (World != NULL)
+	//{
+	//	//if platform is higher than the player then the platform will ignore so that the player can go through
+	//	if (colBox->GetComponentLocation().Z > UGameplayStatics::GetPlayerCharacter(World, 0)->GetCapsuleComponent()->GetComponentLocation().Z)
+	//	{
+	//		if (sprite->GetCollisionResponseToChannel(ECC_Pawn) != ECR_Ignore)
+	//		{
+	//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Platform higher than the player");
+	//			sprite->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	//		}
+	//		//THE PROBLEM IS HERE!!
+	//	}
+	//}	
 }
 
