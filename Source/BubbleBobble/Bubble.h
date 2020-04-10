@@ -32,6 +32,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	FTimerHandle floatTimer;
+	FTimerHandle collisionTimer;
 
 public:
 
@@ -46,12 +47,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collisions)
 	bool playerCollision{ false };
+	bool canPlayerCollide{ false };
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	//Sphere Collision Component
-	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Projectile)
 	class USphereComponent* CollisionComponent;
 
 	UFUNCTION()
@@ -61,11 +63,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
+	//Enemy class to spawn
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enemy)
+	TSubclassOf<class AEnemy> EnemyClass;
+
+	UFUNCTION(BlueprintCallable, Category = "My Functions")
+	void ReleaseEnemy();
+
 	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UFloatingPawnMovement* FloatingPawnMovement;*/
 
 	void FireInDirection(const FVector& ShootDirection);
 	void Despawn();
 	void Float();
+	void PossibleCollide() { canPlayerCollide = true; };
 
 };

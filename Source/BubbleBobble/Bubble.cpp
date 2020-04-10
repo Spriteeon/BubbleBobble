@@ -9,6 +9,7 @@
 #include "TimerManager.h"
 
 #include "Engine/Engine.h"
+#include "Enemy.h"
 
 // Sets default values
 ABubble::ABubble()
@@ -57,6 +58,8 @@ void ABubble::BeginPlay()
 	// Call Float once (0.0f), starting two seconds from now.
 	GetWorldTimerManager().SetTimer(floatTimer, this, &ABubble::Float, 1.0f, true, 0.3f);
 
+	GetWorldTimerManager().SetTimer(collisionTimer, this, &ABubble::PossibleCollide, 1.0f, true, 0.1f);
+
 }
 
 void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -77,7 +80,7 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 		}
 
 	}
-	if (OtherActor->ActorHasTag("Player"))
+	if (OtherActor->ActorHasTag("Player") && canPlayerCollide == true)
 	{
 
 		playerCollision = true;
@@ -93,6 +96,23 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 	{
 
 		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "PLATFORM COLLISION");
+
+	}
+
+}
+
+void ABubble::ReleaseEnemy()
+{
+
+	UWorld* const World = GetWorld();
+	if (World != NULL)
+	{
+
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY SPAWN");
+
+		//FVector spawnLocation = this->RootComponent->GetComponentLocation();
+		FVector spawnLocation = this->GetActorLocation();
+		AEnemy* Enemy = World->SpawnActor<AEnemy>(EnemyClass, spawnLocation, FRotator::ZeroRotator);
 
 	}
 
