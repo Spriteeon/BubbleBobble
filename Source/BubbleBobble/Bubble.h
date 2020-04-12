@@ -64,11 +64,11 @@ public:
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
 	//Enemy class to spawn
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enemy)
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enemy)
 	TSubclassOf<class AEnemy> EnemyClass;
 
 	UFUNCTION(BlueprintCallable, Category = "My Functions")
-	void ReleaseEnemy();
+	void ReleaseEnemy();*/
 
 	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
 	class UFloatingPawnMovement* FloatingPawnMovement;*/

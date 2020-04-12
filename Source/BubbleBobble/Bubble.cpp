@@ -101,22 +101,22 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 
 }
 
-void ABubble::ReleaseEnemy()
-{
-
-	UWorld* const World = GetWorld();
-	if (World != NULL)
-	{
-
-		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY SPAWN");
-
-		//FVector spawnLocation = this->RootComponent->GetComponentLocation();
-		FVector spawnLocation = this->GetActorLocation();
-		AEnemy* Enemy = World->SpawnActor<AEnemy>(EnemyClass, spawnLocation, FRotator::ZeroRotator);
-
-	}
-
-}
+//void ABubble::ReleaseEnemy()
+//{
+//
+//	UWorld* const World = GetWorld();
+//	if (World != NULL)
+//	{
+//
+//		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY SPAWN");
+//
+//		//FVector spawnLocation = this->RootComponent->GetComponentLocation();
+//		FVector spawnLocation = this->GetActorLocation();
+//		AEnemy* Enemy = World->SpawnActor<AEnemy>(EnemyClass, spawnLocation, FRotator::ZeroRotator);
+//
+//	}
+//
+//}
 
 void ABubble::Despawn()
 {
