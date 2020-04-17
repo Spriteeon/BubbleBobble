@@ -129,6 +129,7 @@ void ABubbleBobbleCharacter::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 	
 	UpdateCharacter();	
+	//get the game mode and do the timer
 }
 
 void ABubbleBobbleCharacter::BeginPlay()

@@ -71,9 +71,9 @@ void ABubble::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 		{
 			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
 
-			OtherActor->Destroy();
+			/*OtherActor->Destroy();
 			enemyCollision = true;
-			this->Float();
+			this->Float();*/
 		}
 
 	}
