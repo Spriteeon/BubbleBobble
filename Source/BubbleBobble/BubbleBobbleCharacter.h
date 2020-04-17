@@ -68,7 +68,7 @@ protected:
 
 	FVector spawnPos;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	int lives = 3;
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isImmune = false;
@@ -142,6 +142,7 @@ public:
 	UFUNCTION()
 	void onTimerEnd();
 
+	int lives = 3;
 	int GetLives() const { }
 
 	// Projectile class to spawn
