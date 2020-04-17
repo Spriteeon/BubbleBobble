@@ -189,13 +189,15 @@ void ABubbleBobbleCharacter::UpdateCharacter()
 	// Set the rotation so that the character faces his direction of travel.
 	if (Controller != nullptr)
 	{
-		if (TravelDirection < 0.0f)
+		if (TravelDirection < 0.0f) //Left
 		{
 			Controller->SetControlRotation(FRotator(0.0, 180.0f, 0.0f));
+			//The Other Darkness needs to shrink
 		}
-		else if (TravelDirection > 0.0f)
+		else if (TravelDirection > 0.0f) //Right
 		{
 			Controller->SetControlRotation(FRotator(0.0f, 0.0f, 0.0f));
+			//The First Darkness needs to shrink
 		}
 	}
 }

@@ -66,15 +66,15 @@ class ABubbleBobbleCharacter : public APaperCharacter
 
 protected:
 
-	FVector spawnPos;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	FVector spawnPos;
 	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isImmune = false;
 
 	// The animation to play while running around
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Animations)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
 	class UPaperFlipbook* RunningAnimation;
 
 	// The animation to play while idle (standing still)
