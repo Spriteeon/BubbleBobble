@@ -38,14 +38,6 @@ class ABubbleBobbleCharacter : public APaperCharacter
 {
 	GENERATED_BODY()
 
-	/** Side view camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera, meta=(AllowPrivateAccess="true"))
-	class UCameraComponent* SideViewCameraComponent;
-
-	/** Camera boom positioning the camera beside the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation, meta = (AllowPrivateAccess = "true"))
 	EAnimationStates AnimationState = EAnimationStates::eIdle;
 	EAnimationStates DesiredAnimation;
@@ -134,16 +126,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	EPlayerPower currentPower = EPlayerPower::eStandard;
 
-	/** Returns SideViewCameraComponent subobject **/
-	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
-	/** Returns CameraBoom subobject **/
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
+	class UUserWidget* PlayerUI;
 
 	UFUNCTION()
 	void onTimerEnd();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	int lives = 3;
-	int GetLives() const { }
 
 	// Projectile class to spawn
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile)
