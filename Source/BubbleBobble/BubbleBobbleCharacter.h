@@ -126,9 +126,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	EPlayerPower currentPower = EPlayerPower::eStandard;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
-	class UUserWidget* PlayerUI;
-
 	UFUNCTION()
 	void onTimerEnd();
 

@@ -53,7 +53,7 @@ ABubbleBobbleCharacter::ABubbleBobbleCharacter()
 
 	// Enable replication on the Sprite component so animations show up when networked
 	GetSprite()->SetIsReplicated(true);
-	bReplicates = true;
+	bReplicates = true;	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -116,7 +116,6 @@ void ABubbleBobbleCharacter::BeginPlay()
 	
 	UWorld* const World = GetWorld();
 	Cast<UBubbleBobbleGameInstance>(UGameplayStatics::GetGameInstance(World))->BG_Music();
-	//create the widget and add it to the viewport (maybe i did it in the testing grounds project)
 }
 
 
