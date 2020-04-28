@@ -125,7 +125,7 @@ void ABubbleBobbleCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABubbleBobbleCharacter::MoveRight);
 
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ABubbleBobbleCharacter::Fire);
+	//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ABubbleBobbleCharacter::Fire);
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ABubbleBobbleCharacter::StopAnimation);
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &ABubbleBobbleCharacter::TouchStarted);
@@ -203,13 +203,6 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 				Respawn();
 			}
 		}
-		if (OtherActor->ActorHasTag("Wall"))
-		{
-
-
-
-		}
-
 	}	
 }
 

@@ -116,8 +116,9 @@ protected:
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	//Shooting 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "My Functions")
 	void Fire();
+
 	void Respawn();
 
 public:
