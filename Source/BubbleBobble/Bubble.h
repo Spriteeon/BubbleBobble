@@ -17,6 +17,13 @@ enum class EBubbleType : uint8
 	eGumBubble
 };
 
+UENUM(BlueprintType)
+enum class EEnemyType : uint8
+{
+	eStandardEnemy,
+	eBlobEnemy
+};
+
 UCLASS()
 class BUBBLEBOBBLE_API ABubble : public AActor
 {
@@ -38,6 +45,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BubbleType, meta = (AllowPrivateAccess = "true"))
 	EBubbleType currentBubble = EBubbleType::eStandardBubble;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = EnemyType, meta = (AllowPrivateAccess = "true"))
+	EEnemyType currentEnemy;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Floating)
 	bool floating{ false };
