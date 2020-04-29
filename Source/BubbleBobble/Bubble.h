@@ -85,7 +85,10 @@ public:
 
 	void FireInDirection(const FVector& ShootDirection);
 	void Despawn();
+
+	UFUNCTION(BlueprintCallable, Category = "My Functions")
 	void Float();
+
 	void PossibleCollide() { canPlayerCollide = true; };
 
 };
