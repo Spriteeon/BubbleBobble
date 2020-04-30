@@ -23,5 +23,5 @@ public:
 	bool FearActivated{ false };
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	int Timer{ 60 };
+	int Timer{ 120 };
 };
