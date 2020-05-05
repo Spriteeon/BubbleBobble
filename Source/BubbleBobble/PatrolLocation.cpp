@@ -18,10 +18,10 @@ EBTNodeResult::Type UPatrolLocation::AbortTask(UBehaviorTreeComponent & OwnerCom
 	return EBTNodeResult::Type();
 }
 
-FName UPatrolLocation::GetNodeIconName() const
-{
-	return FName();
-}
+//FName UPatrolLocation::GetNodeIconName() const
+//{
+//	return FName();
+//}
 
 void UPatrolLocation::OnGameplayTaskActivated(UGameplayTask & Task)
 {

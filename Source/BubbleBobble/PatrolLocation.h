@@ -20,7 +20,7 @@ protected:
 	virtual EBTNodeResult::Type AbortTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 public:
-	virtual FName GetNodeIconName() const override;
+	//virtual FName GetNodeIconName() const override;
 	virtual void OnGameplayTaskActivated(UGameplayTask& Task) override;
 	virtual void OnGameplayTaskDeactivated(UGameplayTask& Task) override;
 };
