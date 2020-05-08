@@ -188,11 +188,6 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 	{
 		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
 		{
-			if (GEngine) /** Global engine pointer. Can be 0 so don't use without checking. */
-			{
-				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "ENEMY COLLISION");
-			}
-
 			if (lives <= 0)
 			{
 				// GAME OVER
@@ -204,6 +199,14 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 			}
 		}
 	}	
+	if (isImmune)
+	{
+		UWorld* const World = GetWorld();
+		if (World != NULL)
+		{
+			World->GetTimerManager().SetTimer(loopTimeHandle, this, &ABubbleBobbleCharacter::SetImmunity, 2.f, false);
+		}
+	}
 }
 
 void ABubbleBobbleCharacter::Fire() //Shooting
@@ -269,7 +272,8 @@ void ABubbleBobbleCharacter::Respawn()
 	UGameplayStatics::PlaySound2D(this, RespawnSound);
 	lives--;
 	this->SetActorLocation(spawnPos, false);
-	SetImmunity();
+	SetImmunity(true);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Immunity set to true");
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{

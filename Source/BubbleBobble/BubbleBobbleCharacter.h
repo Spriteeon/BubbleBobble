@@ -54,7 +54,8 @@ class ABubbleBobbleCharacter : public APaperCharacter
 	virtual void Jump() override;
 	virtual void StopJumping() override;
 
-	void SetImmunity() { isImmune = !isImmune; }
+	void SetImmunity(bool state) { isImmune = state; }
+	void SetImmunity() { isImmune = false; }
 
 protected:
 
