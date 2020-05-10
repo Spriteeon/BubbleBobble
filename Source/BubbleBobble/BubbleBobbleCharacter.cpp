@@ -273,7 +273,7 @@ void ABubbleBobbleCharacter::Respawn()
 	lives--;
 	this->SetActorLocation(spawnPos, false);
 	SetImmunity(true);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Immunity set to true");
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "Immunity set to true");
 	UWorld* const World = GetWorld();
 	if (World != NULL)
 	{
