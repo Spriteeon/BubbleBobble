@@ -15,6 +15,7 @@
 #include "Engine/Engine.h"
 
 #include "Bubble.h"
+#include "Enemy.h"
 
 DEFINE_LOG_CATEGORY_STATIC(SideScrollerCharacter, Log, All);
 
@@ -186,18 +187,23 @@ void ABubbleBobbleCharacter::OnOverlapBegin(UPrimitiveComponent * OverlappedComp
 	// Checks actor is not ourself.
 	if ((OtherActor != nullptr) && (OtherActor != this) && !isImmune)
 	{
-		if (OtherActor->ActorHasTag("Enemy")) // Checks player is colliding with enemy
+		GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::Magenta, OtherActor->GetClass()->GetName());
+		if (OtherActor->GetClass()->GetName().StartsWith("Enemy"))
 		{
-			if (lives <= 0)
+			GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::Magenta, OtherActor->bHidden ? "HIDDEN YES" : "HIDDEN NO");
+			if (!OtherActor->bHidden)
 			{
-				// GAME OVER
-				GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "DEAD");
-			}
-			else
-			{
-				Respawn();
-			}
-		}
+				if (lives <= 0)
+				{
+					// GAME OVER
+					GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::White, "DEAD");
+				}
+				else
+				{
+					Respawn();
+				}
+			}			
+		}		
 	}	
 	if (isImmune)
 	{
